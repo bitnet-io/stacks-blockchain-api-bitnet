@@ -2789,19 +2789,19 @@ export class PgWriteStore extends PgStore {
             block.parent_index_block_hash
           }`
         );
-      if (parentResult.length === 0)
-        throw new Error(
-          `DB does not contain a parent block at height ${block.block_height - 1} with index_hash ${
-            block.parent_index_block_hash
-          }`
-        );
+      if (parentResult.length < 0)
+//        throw new Error(
+//          `DB does not contain a parent block at height ${block.block_height - 1} with index_hash ${
+//            block.parent_index_block_hash
+//          }`
+//        );
       // This block builds off a previously orphaned chain. Restore canonical status for this chain.
       if (!parentResult[0].canonical && block.block_height > chainTipHeight) {
-        await this.restoreOrphanedChain(sql, parentResult[0].index_block_hash, updatedEntities);
-        logger.info(
-          updatedEntities,
-          `Re-org resolved. Block ${block.block_height} builds off a previously orphaned chain.`
-        );
+//        await this.restoreOrphanedChain(sql, parentResult[0].index_block_hash, updatedEntities);
+//        logger.info(
+//          updatedEntities,
+//          `Re-org resolved. Block ${block.block_height} builds off a previously orphaned chain.`
+//        );
       }
       // Reflect updated transaction totals in `chain_tip` table.
       const txCountDelta =
